@@ -1,0 +1,25 @@
+{
+  "capturedAt" : "2026-06-23T23:20:46.580076721",
+  "routeId" : "get-one-record",
+  "httpMethod" : "GET",
+  "endpoint" : "http://localhost:8081/api/lifts/2",
+  "httpStatus" : 200,
+  "response" : {
+    "id" : 2,
+    "liftType" : "SQUAT",
+    "muscleGroup" : "LEGS",
+    "weightKg" : 160.0,
+    "reps" : 3,
+    "sets" : 1,
+    "rpe" : 8,
+    "bodyweightKg" : 82.0,
+    "gymLocation" : "Fit Fabrika Zagreb",
+    "equipment" : "Safety squat bar, belt, knee sleeves",
+    "liftDate" : "2025-04-08",
+    "milestone" : false,
+    "notes" : "3 clean reps at 160kg, last one was a grinder. Depth was good.",
+    "addedBy" : "admin",
+    "createdAt" : "2026-06-23T22:52:37.20807",
+    "updatedAt" : "2026-06-23T22:52:37.208089"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "capturedAt" : "2026-06-23T23:29:48.869555709",
+  "routeId" : "createrecord",
+  "httpMethod" : "POST",
+  "endpoint" : "http://localhost:8081/api/lifts",
+  "httpStatus" : 201,
+  "response" : {
+    "id" : 47,
+    "liftType" : "BENCH_PRESS",
+    "muscleGroup" : "CHEST",
+    "weightKg" : 100.0,
+    "reps" : 5,
+    "sets" : 3,
+    "rpe" : 8,
+    "bodyweightKg" : 80.0,
+    "gymLocation" : "Fit Fabrika Zagreb (Camel Test)",
+    "equipment" : "Barbell, wrist wraps",
+    "liftDate" : "2026-06-21",
+    "milestone" : false,
+    "notes" : "Bench press session 3 sets of 5 reps at 100kg [Camel Integration Test]",
+    "addedBy" : "admin",
+    "createdAt" : "2026-06-23T23:29:48.841726251",
+    "updatedAt" : "2026-06-23T23:29:48.841749893"
+  }
+}

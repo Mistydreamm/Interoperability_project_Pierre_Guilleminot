@@ -1,0 +1,25 @@
+{
+  "capturedAt" : "2026-06-23T23:30:48.467762668",
+  "routeId" : "get-one-record",
+  "httpMethod" : "GET",
+  "endpoint" : "http://localhost:8081/api/lifts/5",
+  "httpStatus" : 200,
+  "response" : {
+    "id" : 5,
+    "liftType" : "PULL_UP",
+    "muscleGroup" : "BACK",
+    "weightKg" : 25.0,
+    "reps" : 5,
+    "sets" : 3,
+    "rpe" : 8,
+    "bodyweightKg" : 82.0,
+    "gymLocation" : "Fit Fabrika Zagreb",
+    "equipment" : "Dip belt, 25kg plate",
+    "liftDate" : "2025-04-03",
+    "milestone" : false,
+    "notes" : "Weighted pull-ups 5x3 with 25kg. Pronated grip, full ROM.",
+    "addedBy" : "admin",
+    "createdAt" : "2026-06-23T22:52:37.215239",
+    "updatedAt" : "2026-06-23T22:52:37.215253"
+  }
+}

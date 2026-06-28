@@ -1,0 +1,25 @@
+{
+  "capturedAt" : "2026-06-28T21:56:55.37167695",
+  "routeId" : "get-one-record",
+  "httpMethod" : "GET",
+  "endpoint" : "http://localhost:8081/api/lifts/1",
+  "httpStatus" : 200,
+  "response" : {
+    "id" : 1,
+    "liftType" : "DEADLIFT",
+    "muscleGroup" : "BACK",
+    "weightKg" : 200.0,
+    "reps" : 1,
+    "sets" : 1,
+    "rpe" : 9,
+    "bodyweightKg" : 82.5,
+    "gymLocation" : "Fit Fabrika Zagreb",
+    "equipment" : "Rogue Ohio Bar, straps, belt",
+    "liftDate" : "2025-04-10",
+    "milestone" : true,
+    "notes" : "Hit 200kg for the first time. Clean single, no mixed grip. Years in the making.",
+    "addedBy" : "admin",
+    "createdAt" : "2026-06-28T21:55:00.501836",
+    "updatedAt" : "2026-06-28T21:55:00.501846"
+  }
+}

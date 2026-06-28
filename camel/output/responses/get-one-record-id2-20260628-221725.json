@@ -1,0 +1,25 @@
+{
+  "capturedAt" : "2026-06-28T22:17:25.625862373",
+  "routeId" : "get-one-record",
+  "httpMethod" : "GET",
+  "endpoint" : "http://localhost:8081/api/lifts/2",
+  "httpStatus" : 200,
+  "response" : {
+    "id" : 2,
+    "liftType" : "SQUAT",
+    "muscleGroup" : "LEGS",
+    "weightKg" : 160.0,
+    "reps" : 1,
+    "sets" : 1,
+    "rpe" : 9,
+    "bodyweightKg" : 81.0,
+    "gymLocation" : "Fit Fabrika Zagreb (Camel Test)",
+    "equipment" : "Squat rack, belt",
+    "liftDate" : "2026-06-21",
+    "milestone" : false,
+    "notes" : "Updated Squat heavy single [Camel Integration Test]",
+    "addedBy" : "admin",
+    "createdAt" : "2026-06-28T21:55:00.512598",
+    "updatedAt" : "2026-06-28T22:16:55.629005"
+  }
+}

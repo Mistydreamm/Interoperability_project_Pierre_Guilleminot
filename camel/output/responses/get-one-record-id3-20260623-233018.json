@@ -1,0 +1,25 @@
+{
+  "capturedAt" : "2026-06-23T23:30:18.472354503",
+  "routeId" : "get-one-record",
+  "httpMethod" : "GET",
+  "endpoint" : "http://localhost:8081/api/lifts/3",
+  "httpStatus" : 200,
+  "response" : {
+    "id" : 3,
+    "liftType" : "DEADLIFT",
+    "muscleGroup" : "BACK",
+    "weightKg" : 200.0,
+    "reps" : 1,
+    "sets" : 1,
+    "rpe" : 10,
+    "bodyweightKg" : 80.5,
+    "gymLocation" : "Fit Fabrika Zagreb (Camel Test)",
+    "equipment" : "Rogue Ohio Bar, straps",
+    "liftDate" : "2026-06-21",
+    "milestone" : true,
+    "notes" : "Updated Deadlift milestone PR! [Camel Integration Test]",
+    "addedBy" : "admin",
+    "createdAt" : "2026-06-23T22:52:37.21096",
+    "updatedAt" : "2026-06-23T23:27:44.102152"
+  }
+}

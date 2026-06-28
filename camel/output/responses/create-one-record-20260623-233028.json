@@ -1,0 +1,25 @@
+{
+  "capturedAt" : "2026-06-23T23:30:28.476396411",
+  "routeId" : "createrecord",
+  "httpMethod" : "POST",
+  "endpoint" : "http://localhost:8081/api/lifts",
+  "httpStatus" : 201,
+  "response" : {
+    "id" : 52,
+    "liftType" : "SQUAT",
+    "muscleGroup" : "LEGS",
+    "weightKg" : 150.0,
+    "reps" : 3,
+    "sets" : 1,
+    "rpe" : 9,
+    "bodyweightKg" : 81.0,
+    "gymLocation" : "Fit Fabrika Zagreb (Camel Test)",
+    "equipment" : "Squat rack, belt",
+    "liftDate" : "2026-06-21",
+    "milestone" : true,
+    "notes" : "New Squat PR single [Camel Integration Test]",
+    "addedBy" : "admin",
+    "createdAt" : "2026-06-23T23:30:28.467503758",
+    "updatedAt" : "2026-06-23T23:30:28.46754513"
+  }
+}

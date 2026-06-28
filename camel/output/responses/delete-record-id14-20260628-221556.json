@@ -1,0 +1,8 @@
+{
+  "capturedAt" : "2026-06-28T22:15:56.003419046",
+  "routeId" : "delete-record",
+  "httpMethod" : "DELETE",
+  "endpoint" : "http://localhost:8081/api/lifts/14",
+  "httpStatus" : 204,
+  "response" : null
+}

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${#strings.replace(record.liftType.name(),'_',' ')} + ' — GymPR'">PR — GymPR</title>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+            --bg: #0a0a0a; --surface: #131313; --surface-2: #1c1c1c;
+            --border: #2a2a2a; --accent: #dc2626; --accent-hover: #b91c1c;
+            --text: #f5f5f5; --text-muted: #a1a1aa;
+            --success: #22c55e; --danger: #ef4444; --gold: #fbbf24;
+        }
+        body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; min-height: 100vh; }
+        a { color: var(--accent); text-decoration: none; }
+        .navbar { background: var(--surface); border-bottom: 2px solid var(--accent); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 60px; }
+        .navbar-brand { font-size: 1.4rem; font-weight: 900; color: var(--accent); letter-spacing: 2px; text-transform: uppercase; }
+        .navbar-nav { display: flex; align-items: center; gap: 1.5rem; list-style: none; }
+        .navbar-nav a { color: var(--text-muted); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+        .user-badge { background: var(--surface-2); border: 1px solid var(--border); border-radius: 4px; padding: 0.2rem 0.7rem; font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; }
+        .btn { display: inline-flex; align-items: center; padding: 0.45rem 1rem; border-radius: 4px; border: 1px solid transparent; font-size: 0.78rem; font-weight: 800; cursor: pointer; transition: all 0.15s; text-decoration: none; text-transform: uppercase; letter-spacing: 1px; }
+        .btn-primary { background: var(--accent); color: #fff; }
+        .btn-primary:hover { background: var(--accent-hover); color: #fff; }
+        .btn-outline { background: transparent; color: var(--text); border-color: var(--border); }
+        .btn-outline:hover { background: var(--surface-2); color: var(--text); }
+        .btn-danger { background: transparent; color: var(--danger); border-color: var(--danger); }
+        .btn-danger:hover { background: var(--danger); color: #fff; }
+        .btn-sm { padding: 0.3rem 0.65rem; font-size: 0.7rem; }
+
+        .main { max-width: 820px; margin: 0 auto; padding: 2rem 1.5rem; }
+        .breadcrumb { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; }
+
+        .detail-card { background: var(--surface); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }
+        .detail-card.milestone { border-top: 4px solid var(--gold); }
+        .detail-card:not(.milestone) { border-top: 4px solid var(--accent); }
+
+        .hero-section { padding: 2rem; background: linear-gradient(180deg, rgba(220,38,38,0.05) 0%, transparent 100%); text-align: center; border-bottom: 1px solid var(--border); position: relative; }
+        .hero-section.milestone { background: linear-gradient(180deg, rgba(251,191,36,0.08) 0%, transparent 100%); }
+
+        .milestone-banner { position: absolute; top: 1rem; right: 1rem; background: var(--gold); color: #0a0a0a; font-size: 0.7rem; font-weight: 900; padding: 0.3rem 0.75rem; letter-spacing: 1.5px; text-transform: uppercase; border-radius: 3px; }
+
+        .lift-name { font-size: 0.9rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 3px; font-weight: 700; margin-bottom: 0.5rem; }
+        .weight-hero { font-size: 5rem; font-weight: 900; color: var(--accent); line-height: 1; letter-spacing: -3px; }
+        .weight-hero.milestone { color: var(--gold); }
+        .weight-unit-hero { font-size: 1.5rem; color: var(--text-muted); font-weight: 700; margin-left: 0.5rem; }
+        .reps-hero { font-size: 1.2rem; color: var(--text); font-weight: 700; margin-top: 0.5rem; }
+        .reps-hero strong { color: var(--accent); }
+
+        .estimated-1rm { display: inline-block; margin-top: 1rem; padding: 0.4rem 0.9rem; background: var(--surface-2); border: 1px solid var(--border); border-radius: 4px; font-size: 0.78rem; color: var(--text-muted); font-weight: 700; letter-spacing: 0.5px; }
+        .estimated-1rm strong { color: var(--accent); font-size: 1rem; }
+
+        .body-section { padding: 2rem; }
+
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 0.75rem; margin-bottom: 1.5rem; }
+        .stat-item { background: var(--surface-2); border: 1px solid var(--border); padding: 0.9rem 1rem; border-radius: 4px; text-align: center; }
+        .stat-label { font-size: 0.68rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.35rem; font-weight: 800; }
+        .stat-value { font-size: 1.3rem; font-weight: 900; color: var(--text); }
+
+        .rpe-section { margin-bottom: 1.5rem; }
+        .section-label { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 0.75rem; font-weight: 800; }
+
+        .rpe-scale { display: flex; gap: 4px; align-items: flex-end; }
+        .rpe-bar-item { flex: 1; background: var(--surface-2); border: 1px solid var(--border); border-radius: 2px; height: 36px; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 4px; font-size: 0.7rem; color: var(--text-muted); font-weight: 700; }
+        .rpe-bar-item.filled { background: var(--accent); border-color: var(--accent); color: #fff; }
+        .rpe-bar-item.max    { background: var(--gold); border-color: var(--gold); color: #0a0a0a; }
+
+        .badges-row { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.5rem; }
+        .badge { display: inline-block; padding: 0.25rem 0.65rem; border-radius: 3px; font-size: 0.7rem; font-weight: 800; letter-spacing: 0.6px; text-transform: uppercase; }
+        .badge-group { background: rgba(220,38,38,0.12); color: #f87171; border: 1px solid rgba(220,38,38,0.3); }
+        .badge-lift  { background: var(--surface-2); color: var(--text-muted); border: 1px solid var(--border); }
+
+        .info-rows { margin-bottom: 1.5rem; }
+        .info-row { display: flex; padding: 0.6rem 0; border-bottom: 1px dashed var(--border); font-size: 0.88rem; }
+        .info-row:last-child { border-bottom: none; }
+        .info-key { flex: 0 0 140px; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; font-size: 0.75rem; padding-top: 0.1rem; }
+        .info-val { color: var(--text); font-weight: 500; flex: 1; }
+
+        .notes-section { background: var(--surface-2); border-left: 3px solid var(--accent); padding: 1rem 1.25rem; border-radius: 0 4px 4px 0; margin-bottom: 1.5rem; }
+        .notes-text { color: var(--text); line-height: 1.7; font-size: 0.92rem; }
+
+        .action-row { display: flex; gap: 0.75rem; padding-top: 1.25rem; border-top: 1px solid var(--border); }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <a class="navbar-brand" th:href="@{/lifts}">GymPR</a>
+    <ul class="navbar-nav">
+        <li><a th:href="@{/lifts}">PR Log</a></li>
+        <li><span class="user-badge" sec:authentication="name">user</span></li>
+        <li>
+            <form th:action="@{/auth/logout}" method="post" style="display:inline">
+                <button type="submit" class="btn btn-outline btn-sm">Logout</button>
+            </form>
+        </li>
+    </ul>
+</nav>
+
+<div class="main">
+    <div class="breadcrumb">
+        <a th:href="@{/lifts}">PR Log</a> /
+        <span th:text="${#strings.replace(record.liftType.name(),'_',' ')}"></span>
+    </div>
+
+    <div class="detail-card" th:classappend="${record.milestone} ? 'milestone'">
+        <div class="hero-section" th:classappend="${record.milestone} ? 'milestone'">
+            <span class="milestone-banner" th:if="${record.milestone}">★ MILESTONE</span>
+
+            <div class="lift-name" th:text="${#strings.replace(record.liftType.name(),'_',' ')}"></div>
+
+            <div>
+                <span class="weight-hero"
+                      th:classappend="${record.milestone} ? 'milestone'"
+                      th:text="${record.weightKg}"></span><span class="weight-unit-hero">KG</span>
+            </div>
+
+            <div class="reps-hero">
+                <strong th:text="${record.sets != null ? record.sets + ' × ' + record.reps : record.reps}"></strong>
+                <span th:text="${record.reps == 1 ? 'rep' : 'reps'}"></span>
+            </div>
+
+            <!-- Epley 1RM formula: weight × (1 + reps/30) -->
+            <div class="estimated-1rm" th:if="${record.reps > 1}">
+                Est. 1RM:
+                <strong th:text="${#numbers.formatDecimal(record.weightKg.doubleValue() * (1.0 + record.reps / 30.0), 1, 1)} + ' kg'"></strong>
+            </div>
+        </div>
+
+        <div class="body-section">
+            <div class="stats-grid">
+                <div class="stat-item" th:if="${record.bodyweightKg != null}">
+                    <div class="stat-label">Bodyweight</div>
+                    <div class="stat-value" th:text="${record.bodyweightKg} + ' kg'"></div>
+                </div>
+                <div class="stat-item" th:if="${record.bodyweightKg != null and record.bodyweightKg.doubleValue() > 0}">
+                    <div class="stat-label">Ratio</div>
+                    <div class="stat-value"
+                         th:text="${#numbers.formatDecimal(record.weightKg.doubleValue() / record.bodyweightKg.doubleValue(), 1, 2)} + 'x BW'"></div>
+                </div>
+                <div class="stat-item" th:if="${record.liftDate != null}">
+                    <div class="stat-label">Date</div>
+                    <div class="stat-value" style="font-size:1rem;"
+                         th:text="${#temporals.format(record.liftDate, 'dd. MM. yyyy.')}"></div>
+                </div>
+            </div>
+
+            <div class="rpe-section" th:if="${record.rpe != null}">
+                <div class="section-label" th:text="'RPE ' + ${record.rpe} + ' / 10'"></div>
+                <div class="rpe-scale">
+                    <div class="rpe-bar-item" th:each="i : ${#numbers.sequence(1,10)}"
+                         th:classappend="${i <= record.rpe ? (record.rpe == 10 ? 'max' : 'filled') : ''}"
+                         th:text="${i}"></div>
+                </div>
+            </div>
+
+            <div class="badges-row">
+                <span class="badge badge-group" th:text="${#strings.replace(record.muscleGroup.name(),'_',' ')}"></span>
+            </div>
+
+            <div class="info-rows">
+                <div class="info-row" th:if="${record.gymLocation != null and !record.gymLocation.isBlank()}">
+                    <div class="info-key">Gym</div>
+                    <div class="info-val" th:text="${record.gymLocation}"></div>
+                </div>
+                <div class="info-row" th:if="${record.equipment != null and !record.equipment.isBlank()}">
+                    <div class="info-key">Equipment</div>
+                    <div class="info-val" th:text="${record.equipment}"></div>
+                </div>
+                <div class="info-row" th:if="${record.addedBy != null}">
+                    <div class="info-key">Logged by</div>
+                    <div class="info-val" th:text="${record.addedBy}"></div>
+                </div>
+            </div>
+
+            <div class="notes-section" th:if="${record.notes != null and !record.notes.isBlank()}">
+                <div class="section-label">Training Notes</div>
+                <p class="notes-text" th:text="${record.notes}"></p>
+            </div>
+
+            <div class="action-row">
+                <a th:href="@{/lifts}" class="btn btn-outline">Back</a>
+                <a th:href="@{/lifts/edit/{id}(id=${record.id})}"
+                   class="btn btn-primary" sec:authorize="hasRole('ADMIN')">Edit</a>
+                <form th:action="@{/lifts/delete/{id}(id=${record.id})}" method="post"
+                      sec:authorize="hasRole('ADMIN')" onsubmit="return confirm('Remove this PR?')">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

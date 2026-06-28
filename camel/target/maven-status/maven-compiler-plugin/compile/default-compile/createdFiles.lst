@@ -1,0 +1,11 @@
+hr/algebra/gympr/camel/route/GetOneRoute.class
+hr/algebra/gympr/camel/route/GetAllRoute.class
+hr/algebra/gympr/camel/route/DeleteRoute.class
+hr/algebra/gympr/camel/route/UpdateRoute.class
+hr/algebra/gympr/camel/config/AppConfig.class
+hr/algebra/gympr/camel/processor/ResponseProcessor.class
+hr/algebra/gympr/camel/service/PayloadEncryptor.class
+hr/algebra/gympr/camel/GymprCamelApplication.class
+hr/algebra/gympr/camel/route/CreateRoute.class
+hr/algebra/gympr/camel/dto/TokenResponse.class
+hr/algebra/gympr/camel/service/CamelAuthService.class

@@ -1,0 +1,25 @@
+{
+  "capturedAt" : "2026-06-28T22:16:40.631323473",
+  "routeId" : "get-one-record",
+  "httpMethod" : "GET",
+  "endpoint" : "http://localhost:8081/api/lifts/4",
+  "httpStatus" : 200,
+  "response" : {
+    "id" : 4,
+    "liftType" : "OVERHEAD_PRESS",
+    "muscleGroup" : "SHOULDERS",
+    "weightKg" : 70.0,
+    "reps" : 1,
+    "sets" : 1,
+    "rpe" : 9,
+    "bodyweightKg" : 82.0,
+    "gymLocation" : "Fit Fabrika Zagreb",
+    "equipment" : "Standard barbell",
+    "liftDate" : "2025-04-04",
+    "milestone" : false,
+    "notes" : "Strict press, no leg drive. Great bar path, shoulders felt strong.",
+    "addedBy" : "admin",
+    "createdAt" : "2026-06-28T21:55:00.51669",
+    "updatedAt" : "2026-06-28T21:55:00.5167"
+  }
+}

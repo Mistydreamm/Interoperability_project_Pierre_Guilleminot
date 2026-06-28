@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${editMode} ? 'Edit PR — GymPR' : 'New PR — GymPR'">Form — GymPR</title>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+            --bg: #0a0a0a; --surface: #131313; --surface-2: #1c1c1c;
+            --border: #2a2a2a; --accent: #dc2626; --accent-hover: #b91c1c;
+            --accent-glow: rgba(220,38,38,0.2);
+            --text: #f5f5f5; --text-muted: #a1a1aa; --danger: #ef4444; --gold: #fbbf24;
+        }
+        body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; min-height: 100vh; }
+        a { color: var(--accent); text-decoration: none; }
+        .navbar { background: var(--surface); border-bottom: 2px solid var(--accent); padding: 0 2rem; display: flex; align-items: center; height: 60px; }
+        .navbar-brand { font-size: 1.4rem; font-weight: 900; color: var(--accent); letter-spacing: 2px; text-transform: uppercase; }
+        .btn { display: inline-flex; align-items: center; padding: 0.45rem 1rem; border-radius: 4px; border: 1px solid transparent; font-size: 0.78rem; font-weight: 800; cursor: pointer; transition: all 0.15s; text-decoration: none; text-transform: uppercase; letter-spacing: 1px; }
+        .btn-primary { background: var(--accent); color: #fff; }
+        .btn-primary:hover { background: var(--accent-hover); color: #fff; }
+        .btn-outline { background: transparent; color: var(--text); border-color: var(--border); }
+        .btn-outline:hover { background: var(--surface-2); color: var(--text); }
+
+        .main { max-width: 750px; margin: 0 auto; padding: 2rem 1.5rem; }
+        .breadcrumb { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; }
+        .form-card { background: var(--surface); border: 1px solid var(--border); border-top: 4px solid var(--accent); border-radius: 4px; padding: 2rem; }
+        .form-title { font-size: 1.3rem; font-weight: 900; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 2px; }
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .fg { display: flex; flex-direction: column; gap: 0.35rem; }
+        .fg.full { grid-column: 1 / -1; }
+        .fg label { font-size: 0.7rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+        .required::after { content: ' *'; color: var(--accent); }
+        .form-control, .form-select { background: var(--surface-2); border: 1px solid var(--border); color: var(--text); padding: 0.5rem 0.75rem; border-radius: 4px; font-size: 0.9rem; appearance: none; width: 100%; transition: border-color 0.15s; font-weight: 500; }
+        .form-control:focus, .form-select:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
+        .form-control::placeholder { color: var(--text-muted); }
+        textarea.form-control { resize: vertical; min-height: 100px; font-family: inherit; }
+        .field-error { color: var(--danger); font-size: 0.78rem; }
+        .section-label { grid-column: 1 / -1; font-size: 0.68rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1.5px; padding-top: 0.5rem; border-top: 1px solid var(--border); }
+
+        .checkbox-wrap { grid-column: 1 / -1; display: flex; align-items: center; gap: 0.75rem; padding: 0.8rem 1rem; background: var(--surface-2); border: 1px solid var(--border); border-radius: 4px; cursor: pointer; transition: border-color 0.15s; }
+        .checkbox-wrap:hover { border-color: var(--gold); }
+        .checkbox-wrap input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--gold); cursor: pointer; }
+        .checkbox-label { display: flex; flex-direction: column; cursor: pointer; flex: 1; }
+        .checkbox-title { font-size: 0.85rem; font-weight: 700; color: var(--text); }
+        .checkbox-desc  { font-size: 0.75rem; color: var(--text-muted); margin-top: 0.15rem; }
+
+        .form-actions { display: flex; gap: 0.75rem; justify-content: flex-end; margin-top: 1.75rem; padding-top: 1.25rem; border-top: 1px solid var(--border); }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <a class="navbar-brand" th:href="@{/lifts}">GymPR</a>
+</nav>
+
+<div class="main">
+    <div class="breadcrumb">
+        <a th:href="@{/lifts}">PR Log</a> /
+        <span th:text="${editMode} ? 'Edit PR' : 'New PR'"></span>
+    </div>
+
+    <div class="form-card">
+        <h2 class="form-title" th:text="${editMode} ? 'Edit PR' : 'Log a new PR'"></h2>
+
+        <form th:action="${editMode} ? @{/lifts/edit/{id}(id=${record.id})} : @{/lifts/new}"
+              method="post" th:object="${record}">
+
+            <div class="form-grid">
+
+                <div class="section-label">Lift</div>
+
+                <div class="fg">
+                    <label class="required">Lift Type</label>
+                    <select class="form-select" th:field="*{liftType}">
+                        <option value="">Select lift...</option>
+                        <option th:each="l : ${liftTypes}" th:value="${l}"
+                                th:text="${#strings.replace(l.name(),'_',' ')}"></option>
+                    </select>
+                    <span class="field-error" th:if="${#fields.hasErrors('liftType')}" th:errors="*{liftType}"></span>
+                </div>
+
+                <div class="fg">
+                    <label class="required">Muscle Group</label>
+                    <select class="form-select" th:field="*{muscleGroup}">
+                        <option value="">Select group...</option>
+                        <option th:each="g : ${muscleGroups}" th:value="${g}"
+                                th:text="${#strings.replace(g.name(),'_',' ')}"></option>
+                    </select>
+                    <span class="field-error" th:if="${#fields.hasErrors('muscleGroup')}" th:errors="*{muscleGroup}"></span>
+                </div>
+
+                <div class="section-label">Performance</div>
+
+                <div class="fg">
+                    <label class="required">Weight (kg)</label>
+                    <input class="form-control" type="number" th:field="*{weightKg}" min="0" max="500" step="0.5" placeholder="e.g. 180">
+                    <span class="field-error" th:if="${#fields.hasErrors('weightKg')}" th:errors="*{weightKg}"></span>
+                </div>
+
+                <div class="fg">
+                    <label class="required">Reps</label>
+                    <input class="form-control" type="number" th:field="*{reps}" min="1" max="30" placeholder="e.g. 1">
+                    <span class="field-error" th:if="${#fields.hasErrors('reps')}" th:errors="*{reps}"></span>
+                </div>
+
+                <div class="fg">
+                    <label>Sets</label>
+                    <input class="form-control" type="number" th:field="*{sets}" min="1" max="20" placeholder="e.g. 1">
+                    <span class="field-error" th:if="${#fields.hasErrors('sets')}" th:errors="*{sets}"></span>
+                </div>
+
+                <div class="fg">
+                    <label>RPE (1–10)</label>
+                    <input class="form-control" type="number" th:field="*{rpe}" min="1" max="10" placeholder="e.g. 9">
+                    <span class="field-error" th:if="${#fields.hasErrors('rpe')}" th:errors="*{rpe}"></span>
+                </div>
+
+                <div class="fg">
+                    <label>Bodyweight (kg)</label>
+                    <input class="form-control" type="number" th:field="*{bodyweightKg}" min="0" max="500" step="0.1" placeholder="e.g. 82.5">
+                    <span class="field-error" th:if="${#fields.hasErrors('bodyweightKg')}" th:errors="*{bodyweightKg}"></span>
+                </div>
+
+                <div class="fg">
+                    <label class="required">Lift Date</label>
+                    <input class="form-control" type="date" th:field="*{liftDate}">
+                    <span class="field-error" th:if="${#fields.hasErrors('liftDate')}" th:errors="*{liftDate}"></span>
+                </div>
+
+                <div class="section-label">Context</div>
+
+                <div class="fg">
+                    <label>Gym</label>
+                    <input class="form-control" type="text" th:field="*{gymLocation}" placeholder="e.g. Fit Fabrika Zagreb">
+                </div>
+
+                <div class="fg">
+                    <label>Equipment</label>
+                    <input class="form-control" type="text" th:field="*{equipment}" placeholder="e.g. Rogue Ohio Bar, belt">
+                </div>
+
+                <label class="checkbox-wrap" for="milestone">
+                    <input id="milestone" type="checkbox" th:field="*{milestone}">
+                    <span class="checkbox-label">
+                        <span class="checkbox-title">★ Mark as Milestone</span>
+                        <span class="checkbox-desc">Mark big achievements — 2 plates bench, 200kg deadlift, first bodyweight press, etc.</span>
+                    </span>
+                </label>
+
+                <div class="fg full">
+                    <label>Training Notes</label>
+                    <textarea class="form-control" th:field="*{notes}" placeholder="How it felt, form cues, what worked, what to improve next time..."></textarea>
+                </div>
+
+            </div>
+
+            <div class="form-actions">
+                <a th:href="@{/lifts}" class="btn btn-outline">Cancel</a>
+                <button type="submit" class="btn btn-primary"
+                        th:text="${editMode} ? 'Save changes' : 'Log PR'"></button>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

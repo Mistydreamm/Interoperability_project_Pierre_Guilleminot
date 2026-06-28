@@ -1,0 +1,15 @@
+/home/pier/Bureau/Projet_Algebra /frontend/src/main/java/hr/algebra/project/frontend/enums/Role.java
+/home/pier/Bureau/Projet_Algebra /frontend/src/main/java/hr/algebra/project/frontend/Launcher.java
+/home/pier/Bureau/Projet_Algebra /frontend/src/main/java/hr/algebra/project/frontend/model/LoginRequest.java
+/home/pier/Bureau/Projet_Algebra /frontend/src/main/java/hr/algebra/project/frontend/service/AuthService.java
+/home/pier/Bureau/Projet_Algebra /frontend/src/main/java/hr/algebra/project/frontend/controller/MainViewController.java
+/home/pier/Bureau/Projet_Algebra /frontend/src/main/java/hr/algebra/project/frontend/model/TokenResponse.java
+/home/pier/Bureau/Projet_Algebra /frontend/src/main/java/hr/algebra/project/frontend/model/RefreshTokenRequest.java
+/home/pier/Bureau/Projet_Algebra /frontend/src/main/java/hr/algebra/project/frontend/enums/LiftType.java
+/home/pier/Bureau/Projet_Algebra /frontend/src/main/java/hr/algebra/project/frontend/GymPrClientApplication.java
+/home/pier/Bureau/Projet_Algebra /frontend/src/main/java/hr/algebra/project/frontend/model/RegisterRequest.java
+/home/pier/Bureau/Projet_Algebra /frontend/src/main/java/hr/algebra/project/frontend/service/PersonalRecordService.java
+/home/pier/Bureau/Projet_Algebra /frontend/src/main/java/hr/algebra/project/frontend/enums/MuscleGroup.java
+/home/pier/Bureau/Projet_Algebra /frontend/src/main/java/module-info.java
+/home/pier/Bureau/Projet_Algebra /frontend/src/main/java/hr/algebra/project/frontend/model/PersonalRecord.java
+/home/pier/Bureau/Projet_Algebra /frontend/src/main/java/hr/algebra/project/frontend/controller/LoginRequestController.java

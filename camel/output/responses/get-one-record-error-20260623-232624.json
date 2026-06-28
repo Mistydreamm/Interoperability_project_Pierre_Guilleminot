@@ -1,0 +1,1 @@
+{"error": "Failed to instantiate PooledConnectionFactory: java.lang.ClassNotFoundException: org.messaginghub.pooled.jms.JmsPoolConnectionFactory", "routeId": "post-one-record"}

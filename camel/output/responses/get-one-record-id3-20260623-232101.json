@@ -1,0 +1,25 @@
+{
+  "capturedAt" : "2026-06-23T23:21:01.580077369",
+  "routeId" : "get-one-record",
+  "httpMethod" : "GET",
+  "endpoint" : "http://localhost:8081/api/lifts/3",
+  "httpStatus" : 200,
+  "response" : {
+    "id" : 3,
+    "liftType" : "BENCH_PRESS",
+    "muscleGroup" : "CHEST",
+    "weightKg" : 120.0,
+    "reps" : 1,
+    "sets" : 1,
+    "rpe" : 10,
+    "bodyweightKg" : 82.0,
+    "gymLocation" : "Fit Fabrika Zagreb",
+    "equipment" : "Competition bench, wrist wraps",
+    "liftDate" : "2025-04-06",
+    "milestone" : true,
+    "notes" : "Finally broke 120kg bench. RPE 10, had to grind it. Pause rep.",
+    "addedBy" : "admin",
+    "createdAt" : "2026-06-23T22:52:37.21096",
+    "updatedAt" : "2026-06-23T22:52:37.210985"
+  }
+}

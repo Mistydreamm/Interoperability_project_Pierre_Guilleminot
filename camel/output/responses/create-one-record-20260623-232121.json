@@ -1,0 +1,25 @@
+{
+  "capturedAt" : "2026-06-23T23:21:21.581719485",
+  "routeId" : "createrecord",
+  "httpMethod" : "POST",
+  "endpoint" : "http://localhost:8081/api/lifts",
+  "httpStatus" : 201,
+  "response" : {
+    "id" : 21,
+    "liftType" : "DEADLIFT",
+    "muscleGroup" : "BACK",
+    "weightKg" : 190.0,
+    "reps" : 1,
+    "sets" : 1,
+    "rpe" : 10,
+    "bodyweightKg" : 80.5,
+    "gymLocation" : "Fit Fabrika Zagreb (Camel Test)",
+    "equipment" : "Rogue Ohio Bar, straps",
+    "liftDate" : "2026-06-21",
+    "milestone" : false,
+    "notes" : "Deadlift single rep heavy grinder [Camel Integration Test]",
+    "addedBy" : "admin",
+    "createdAt" : "2026-06-23T23:21:21.570035333",
+    "updatedAt" : "2026-06-23T23:21:21.570077137"
+  }
+}
